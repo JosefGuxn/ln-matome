@@ -1,7 +1,6 @@
 <template>
   <v-container>   
     <v-card>
-      
       <v-card-title primary-title>
         <div>
           <h3 class="display-1 mb-0">Novels Listing</h3>
@@ -12,10 +11,19 @@
       </v-card-title>   
       <v-data-table :headers="headers" :items="seriesArr" 
         hide-actions >
+        <template slot="headers" scope="props">
+          <tr>
+            <th v-for="header in props.headers" :key="header.text" class="headline mb-0">
+              {{header.text}}
+            </th>
+          </tr>
+        </template>
         <template slot="items" scope="props">
-          <td><router-link :to="(props.item.link)">{{props.item.title}}</router-link> </td>
-          <td>{{props.item.release}} </td>
-          <td>{{props.item.status}} </td>
+          <td class="text-xs-left subheading mb-0">
+            <router-link :to="('series/'+props.item.link)">{{props.item.title}}</router-link> 
+          </td>
+          <td class="text-xs-center subheading mb-0">{{props.item.release}} </td>
+          <td class="text-xs-center subheading mb-0">{{props.item.status}} </td>
         </template>
       </v-data-table>
     </v-card>
@@ -51,16 +59,11 @@
       }
     },
     computed: mapGetters({
-      series: 'getAllSeries',
-      seriesArr: 'getSeriesArr'
+      series: 'getNovels',
+      seriesArr: 'getNovelsArr'
     }),
-    methods: {
-      clickSerie (serieName) {
-        console.log(serieName)
-      }
-    },
     created () {
-      this.$store.dispatch('getAllSeries')
+      this.$store.dispatch('loadNovels')
     }
   }
 </script>

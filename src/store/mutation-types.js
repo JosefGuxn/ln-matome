@@ -1,0 +1,1 @@
+export const RECEIVE_NOVELS = 'RECEIVE_NOVELS'

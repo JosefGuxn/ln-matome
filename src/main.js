@@ -4,6 +4,8 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import App from './App'
 import router from './router'
+import store from './store'
+import * as firebase from 'firebase'
 
 Vue.use(Vuetify)
 Vue.config.productionTip = false
@@ -12,6 +14,16 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  created () {
+    firebase.initializeApp({
+      apiKey: 'AIzaSyD-coZaZBG_LCjCbJ0ajDNptG7F37NUOtg',
+      authDomain: 'ln-matome.firebaseapp.com',
+      databaseURL: 'https://ln-matome.firebaseio.com',
+      projectId: 'ln-matome',
+      storageBucket: ''
+    })
+  }
 })

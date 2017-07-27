@@ -35,7 +35,7 @@
           router
           :to="item.link"
         >
-          <v-icon left>{{item.icon}}</v-icon>
+          <v-icon left medium>{{item.icon}}</v-icon>
           {{item.title}}
         </v-btn>
       </v-toolbar-items>
@@ -55,9 +55,10 @@
       return {
         drawer: false,
         items: [
-          { icon: 'list', title: 'Series', link: '/series' },
+          { icon: 'import_contacts', title: 'Novels', link: '/novels' },
           { icon: 'search', title: 'Finder', link: '/finder' },
-          { icon: 'face', title: 'Sign up', link: '/signup' }
+          { icon: 'face', title: 'Sign up', link: '/signup' },
+          { icon: 'input', title: 'Sign in', link: '/signin' }
         ],
         title: 'Ln-matome'
       }
