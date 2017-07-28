@@ -6,8 +6,8 @@ const state = {
 }
 
 const getters = {
-  getNovels: state => state.all,
-  getNovelsArr: state => Object.values(state.all)
+  allNovels: state => state.all,
+  allNovelsArr: state => Object.values(state.all)
 }
 
 const actions = {

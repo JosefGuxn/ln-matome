@@ -9,7 +9,7 @@
             <v-icon>library_add</v-icon>
         </v-btn>
       </v-card-title>   
-      <v-data-table :headers="headers" :items="seriesArr" 
+      <v-data-table :headers="headers" :items="novelsArr" 
         hide-actions >
         <template slot="headers" scope="props">
           <tr>
@@ -59,8 +59,8 @@
       }
     },
     computed: mapGetters({
-      series: 'getNovels',
-      seriesArr: 'getNovelsArr'
+      novels: 'allNovels',
+      novelsArr: 'allNovelsArr'
     }),
     created () {
       this.$store.dispatch('loadNovels')
