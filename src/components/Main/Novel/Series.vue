@@ -1,14 +1,10 @@
 <template>
   <v-container>   
-    <v-card>
-      
+    <v-card>     
       <v-card-title primary-title>
         <div>
-          <h3 class="display-1 mb-0">Novels Listing</h3>
-        </div>       
-        <v-btn icon v-tooltip:right="{ html: 'Add series' }">
-            <v-icon>library_add</v-icon>
-        </v-btn>
+          <h3 class="display-1 mb-0">{{seriesId}}</h3>
+        </div>              
       </v-card-title>   
       <v-data-table :headers="headers" :items="seriesArr" 
         hide-actions >
@@ -23,8 +19,6 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-
   export default {
     data () {
       return {
@@ -47,13 +41,13 @@
             sortable: false,
             value: 'status'
           }
-        ]
+        ],
+        seriesId: this.$route.params.id
       }
     },
-    computed: mapGetters({
-      series: 'getAllSeries',
-      seriesArr: 'getSeriesArr'
-    }),
+    computed: {
+      seriesIdc: 'tmp'
+    },
     methods: {
       clickSerie (serieName) {
         console.log(serieName)

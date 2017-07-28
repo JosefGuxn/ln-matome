@@ -5,7 +5,9 @@
         <div>
           <h3 class="display-1 mb-0">Novels Listing</h3>
         </div>       
-        <v-btn icon v-tooltip:right="{ html: 'Add series' }">
+        <v-btn icon v-tooltip:right="{ html: 'Add series' }"
+          to="addseries"
+        >
             <v-icon>library_add</v-icon>
         </v-btn>
       </v-card-title>   
@@ -20,7 +22,7 @@
         </template>
         <template slot="items" scope="props">
           <td class="text-xs-left subheading mb-0">
-            <router-link :to="('series/'+props.item.link)">{{props.item.title}}</router-link> 
+            <router-link :to="('series/'+props.item.id)">{{props.item.title}}</router-link> 
           </td>
           <td class="text-xs-center subheading mb-0">{{props.item.release}} </td>
           <td class="text-xs-center subheading mb-0">{{props.item.status}} </td>

@@ -43,7 +43,7 @@
     <main>
       <router-view></router-view>
     </main>
-    <v-footer fixed>
+    <v-footer v-show="false">
       <span>&copy; 2017</span>
     </v-footer>
   </v-app>
