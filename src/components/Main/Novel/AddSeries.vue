@@ -63,7 +63,7 @@
       </v-flex>
     </v-layout>
     <v-layout row justify-center>
-      <v-dialog width="500" v-model="dialog" persistent>                
+      <v-dialog width="600" v-model="dialog" persistent>                
         <v-card>
           <v-card-title class="headline">New series has been successfully added.</v-card-title>         
           <v-card-actions>                  
