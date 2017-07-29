@@ -1,36 +1,11 @@
 <template>
   <v-app light>
-    <v-navigation-drawer     
-      persistent          
-      v-model="drawer"
-      temporary
-    >
-      <v-list>
-        <v-list-tile
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-          router
-          :to="item.link"
-        >
-          <v-list-tile-action>
-            <v-icon light v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar fixed>
-      <v-toolbar-side-icon class="hidden-sm-and-up" 
-        @click.native.stop="drawer = !drawer" light>
-      </v-toolbar-side-icon>
+    <v-toolbar class="hidden-xs-only" fixed>     
       <v-toolbar-title>
         <router-link to="/" tag="span" style="cursor: pointer">{{title}}</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-xs-only">       
+      <v-toolbar-items >       
         <v-btn light flat v-for="item in items" :key="item.title"
           router
           :to="item.link"
@@ -43,7 +18,16 @@
     <main>
       <router-view></router-view>
     </main>
-    <v-footer v-show="false">
+    <v-bottom-nav class="teal hidden-sm-and-up" fixed shift value="true">
+      <v-btn dark flat v-for="item in items" :key="item.title"
+          router
+          :to="item.link"
+        >
+          <span>{{item.title}}</span>
+          <v-icon>{{item.icon}}</v-icon>         
+        </v-btn>
+    </v-bottom-nav>
+    <v-footer class="mt-5" v-show="true">
       <span>&copy; 2017</span>
     </v-footer>
   </v-app>
@@ -53,7 +37,7 @@
   export default {
     data () {
       return {
-        drawer: false,
+        mini: true,
         items: [
           { icon: 'import_contacts', title: 'Novels', link: '/novels' },
           { icon: 'search', title: 'Finder', link: '/finder' },
