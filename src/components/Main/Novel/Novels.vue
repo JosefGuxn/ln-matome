@@ -17,43 +17,43 @@
             <template slot="headers" scope="props" >
               <tr v-show="false"></tr>
             </template>
-            <template slot="items" scope="props">
-              <td style="width=80px">
-                <v-layout>
-                  <v-flex class="text-xs-right">
+            <template slot="items" scope="props">             
+              <td style="vertical-align: text-top;">
+                <v-layout class="mt-3" row wrap>
+                  <v-flex class="text-xs-center" xs12 md2>
                     <a :href="('series/'+props.item.id)"><img :src="props.item.imagelink" height="120px" width="80px"></a> 
                   </v-flex>
-                </v-layout>
-              </td>
-              <td style="vertical-align: text-top;">
-                <v-layout class="mt-2" column>
-                  <v-flex xs12>
-                    <router-link  
-                      class="title mb-2" 
-                      :to="('series/'+props.item.id)" 
-                      style="text-decoration: none" >
-                      {{props.item.title}}
-                    </router-link> 
+                  <v-flex xs12 md10>
+                    <v-layout column>
+                      <v-flex>
+                        <router-link  
+                          class="title mb-2" 
+                          :to="('series/'+props.item.id)" 
+                          style="text-decoration: none" >
+                          {{props.item.title}}
+                        </router-link> 
+                      </v-flex>
+                      <v-flex>
+                        <p>by <span class="body-1">{{props.item.author}}</span></p>
+                      </v-flex>           
+                      <v-flex>
+                        <v-chip v-if="props.item.status=='Completed'" class="primary white--text">
+                            Completed
+                          </v-chip>
+                        <v-chip v-else-if="props.item.status=='Stalled'" class="secondary white--text">
+                          Stalled
+                        </v-chip>
+                        <v-chip v-else-if="props.item.status=='Dropped'" class="red white--text">
+                          Dropped
+                        </v-chip>
+                        <v-chip v-else class="green white--text">Ongoing</v-chip>
+                      </v-flex>
+                      <v-flex>
+                        <v-divider></v-divider>
+                        <p>Latest Release: </p>
+                      </v-flex>             
+                    </v-layout>
                   </v-flex>
-                  <v-flex>
-                    <p class="body-1 mb-0">by <span class="subheading">{{props.item.author}}</span></p>
-                  </v-flex>           
-                  <v-flex>
-                    <v-chip v-if="props.item.status=='Completed'" class="primary white--text">
-                        Completed
-                      </v-chip>
-                    <v-chip v-else-if="props.item.status=='Stalled'" class="secondary white--text">
-                      Stalled
-                    </v-chip>
-                    <v-chip v-else-if="props.item.status=='Dropped'" class="red white--text">
-                      Dropped
-                    </v-chip>
-                    <v-chip v-else class="green white--text">Ongoing</v-chip>
-                  </v-flex>
-                  <v-flex>
-                    <v-divider></v-divider>
-                    <p class="body-1">Latest Release: </p>
-                  </v-flex>             
                 </v-layout>
               </td>                       
             </template>
