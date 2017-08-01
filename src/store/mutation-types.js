@@ -1,2 +1,3 @@
 export const RECEIVE_NOVELS = 'RECEIVE_NOVELS'
 export const ADD_SERIES = 'ADD_SERIES'
+export const LOAD_SERIES_INFO = 'LOAD_SERIES_INFO'
