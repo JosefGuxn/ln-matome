@@ -1,3 +1,8 @@
+/**
+* TODO: 
+* - add Genre
+* - add description tooltip
+*/
 <template>
   <v-container fluid>   
     <v-layout row justify-center>     
@@ -5,7 +10,7 @@
         <v-card>
           <v-card-title>
             <div class="headline">Novels Listing</div>
-            <v-btn icon v-tooltip:right="{ html: 'Add series' }"
+            <v-btn class="hidden-sm-and-down" icon v-tooltip:right="{ html: 'Add series' }"
               to="addseries"
             >
               <v-icon>library_add</v-icon>
@@ -20,12 +25,12 @@
             <template slot="items" scope="props">             
               <td style="vertical-align: text-top;">
                 <v-layout class="mt-3" row wrap>
-                  <v-flex class="text-xs-center" xs12 md2>
-                    <a :href="('series/'+props.item.id)"><img :src="props.item.imagelink" height="120px" width="80px"></a> 
+                  <v-flex class="text-xs-center" xs12 sm2>
+                    <router-link :to="('series/'+props.item.id)"><img :src="props.item.imagelink" height="120px" width="80px"></router-link> 
                   </v-flex>
-                  <v-flex xs12 md10>
+                  <v-flex xs12 sm10>
                     <v-layout column>
-                      <v-flex>
+                      <v-flex class="text-xs-center text-sm-left">
                         <router-link  
                           class="title mb-2" 
                           :to="('series/'+props.item.id)" 
@@ -33,10 +38,10 @@
                           {{props.item.title}}
                         </router-link> 
                       </v-flex>
-                      <v-flex>
+                      <v-flex class="text-xs-center text-sm-left">
                         <p>by <span class="body-1">{{props.item.author}}</span></p>
                       </v-flex>           
-                      <v-flex>
+                      <v-flex >
                         <v-chip v-if="props.item.status=='Completed'" class="primary white--text">
                             Completed
                           </v-chip>
@@ -79,9 +84,6 @@
     computed: mapGetters({
       novels: 'allNovels',
       novelsArr: 'allNovelsArr'
-    }),
-    created () {
-      this.$store.dispatch('loadNovels')
-    }
+    })
   }
 </script>
