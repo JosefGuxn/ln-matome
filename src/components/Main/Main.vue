@@ -46,6 +46,9 @@
         ],
         title: 'Ln-matome'
       }
+    },
+    created () {
+      this.$store.dispatch('loadNovels')
     }
   }
 </script>
