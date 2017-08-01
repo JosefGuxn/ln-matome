@@ -1,62 +1,64 @@
 <template>
   <v-container fluid>
-    <v-layout row wrap>
-      <v-flex xs12 md6 offset-md3>
+    <v-layout row justify-center>
+      <v-flex xs12 md6>
         <v-card>
-          <v-card-title primary-title>
-            <div>
-              <h3 class="title mb-0">Add Series</h3>
+          <v-card-title class="primary" primary-title>
+            <div class="white--text display-1 mb-1">
+              Add Series
             </div>              
           </v-card-title>
-          <v-card-text>          
-            <v-divider/> 
-            <h2 class="subheading mb-0">All series will be verified before it gets added to the website. Please do a simple search to see if the novel already exists in our database before you submit your submission. 
-            </h2>
-            <v-divider></v-divider>
+          <v-card-text class="title mt-2">                    
             <v-container fluid>
-              <v-layout row>
-                <v-text-field v-model="id" label="Id" readonly></v-text-field>               
-              </v-layout>
-              <v-layout row>
-                <v-text-field v-model="imagelink" label="Image link"></v-text-field>               
-              </v-layout>
-              <v-layout row>
-                <v-text-field v-model="title" label="Series Name" :rules="[rules.required]">
-
-                </v-text-field>
-              </v-layout>
-              <v-layout row>
-                <v-text-field v-model="author" label="Author" :rules="[rules.required]">
-
-                </v-text-field>
-              </v-layout>
-              <v-layout row>
-                <v-text-field v-model="artist" label="Artist"></v-text-field>
-              </v-layout>
-              <v-layout row>
-                <v-text-field v-model="description" label="Description" :rules="[rules.required]" multi-line>
-
-                </v-text-field>
-              </v-layout>
-              <v-layout row>
-                <v-flex xs4>
-                  <v-text-field v-model="year" label="Year"></v-text-field>
+              <v-layout row wrap>
+                <v-flex xs12>
+                  <v-text-field v-model="id" label="Id" readonly></v-text-field>
+                </v-flex> 
+                <v-flex xs12>
+                  <v-text-field v-model="imagelink" label="Image link"></v-text-field>
+                </v-flex>  
+                <v-flex xs12>
+                  <v-text-field v-model="title" label="Series Name" 
+                  :rules="[rules.required]"></v-text-field>
+                </v-flex>  
+                <v-flex xs12>
+                  <v-text-field v-model="author" label="Author" :rules="[rules.required]" rows="3" hint="One entry per line" multi-line persistent-hint>
+                  </v-text-field>
+                </v-flex>  
+                <v-flex xs12>
+                  <v-text-field v-model="artist" label="Artist"
+                  rows="3" hint="One entry per line" multi-line persistent-hint></v-text-field>
+                </v-flex>  
+                <v-flex xs12>
+                  <v-text-field v-model="description" label="Description" :rules="[rules.required]" multi-line rows="6">
+                  </v-text-field>
                 </v-flex>
-                <v-flex xs4>
-                  <v-select :items="languagesList" v-model="language" label="Language"></v-select>
+                <v-flex xs12>
+                  <v-text-field v-model="associatedNames" label="Associated Names" rows="3" hint="One entry per line" multi-line persistent-hint></v-text-field>
                 </v-flex>
-                <v-flex xs4>
-                  <v-select :items="statusList" v-model="status" label="Status"></v-select>
+                <v-flex xs12>
+                  <v-layout row>
+                    <v-flex xs4>
+                      <v-text-field v-model="year" label="Year"></v-text-field>
+                        </v-flex>
+                    <v-flex xs4>
+                      <v-select :items="languagesList" v-model="language" label="Language" :rules="[rules.required]"></v-select>
+                    </v-flex>
+                    <v-flex xs4>
+                      <v-select :items="statusList" v-model="status" label="Status" :rules="[rules.required]"></v-select>
+                    </v-flex>
+                  </v-layout>
                 </v-flex>
-              </v-layout>           
-              <v-layout row>
-                <v-text-field v-model="genre" label="Genre"></v-text-field>
-              </v-layout>
-              <v-layout row>               
-                <v-btn primary large block @click.native.stop="Submit" :disabled="title==='' || author==='' || description===''">
+                <v-flex xs12>
+                  <v-text-field v-model="genre" label="Genre"></v-text-field>
+                </v-flex>
+                <v-flex xs12>
+                  <v-btn primary large block @click.native.stop="Submit" 
+                  v-show="title!=='' && author!=='' && description!=='' && language!=='' && status!==''">
                   Submit
-                </v-btn>
-              </v-layout>
+                  </v-btn>
+                </v-flex>             
+              </v-layout>             
             </v-container>
           </v-card-text>         
         </v-card>
@@ -84,9 +86,10 @@
         imagelink: '',
         title: '',
         author: '',
-        artist: '',
+        artist: null,
         description: '',
-        year: '',
+        associatedNames: null,
+        year: null,
         language: '',
         languagesList: [
           'Japanese',
@@ -112,24 +115,26 @@
         return _.random(100, 999).toString()
       },
       id () {
-        return this.rand + '-' + this.title.toLowerCase().replace(/ /g, '-')
+        return this.rand + '-' + this.title.toLowerCase().replace(/[^0-9a-z]/gi, ' ').split(' ').join('-')
       }
     },
     methods: {
       Submit () {
-        this.imagelink = this.imagelink === '' ? '' : this.imagelink
+        this.imagelink = this.imagelink === '' ? 'http://www.novelupdates.com/img/noimagefound.jpg' : this.imagelink
         var newSeries = {
           id: this.id,
           imagelink: this.imagelink,
           title: this.title,
           author: this.author,
-          artist: this.artist,
+          artist: this.artist || 'N/A',
+          associatedNames: this.associatedNames || 'N/A',
           description: this.description,
-          year: this.year,
+          year: this.year || 'N/A',
           language: this.language,
           status: this.status,
-          release: 0,
-          lastupdate: {}
+          release: [],
+          lastupdate: {},
+          rating: []
         }
         this.$store.dispatch('addSeries', newSeries)
         this.dialog = true
