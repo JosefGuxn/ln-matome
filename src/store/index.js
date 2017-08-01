@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
 import novels from './modules/novels'
-import series from './modules/series'
+import chapters from './modules/chapters'
 
 Vue.use(Vuex)
 
@@ -12,6 +12,6 @@ export default new Vuex.Store({
   getters,
   modules: {
     novels,
-    series
+    chapters
   }
 })
