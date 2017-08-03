@@ -1,6 +1,6 @@
-# ln-matome
+# ln-yomou
 
-> Light novel translations collection.
+> Light novel translations reading webapp.
 
 ## Build Setup
 
