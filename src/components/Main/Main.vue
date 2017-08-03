@@ -18,7 +18,7 @@
     <main>
       <router-view></router-view>
     </main>
-    <v-bottom-nav class="teal hidden-sm-and-up" fixed shift value="true">
+    <v-bottom-nav class="teal hidden-sm-and-up" fixed value="true">
       <v-btn dark flat v-for="item in items" :key="item.title"
           router
           :to="item.link"
